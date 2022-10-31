@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot3
 # Description: Asynchronous NBP bot with pyTelegramBotAPI
-# Version: 0.1a3
+# Version: 0.1a4
 # Owner: Ruslan Korniichuk
 
 import asyncio
@@ -36,19 +36,10 @@ async def start(message):
                            reply_markup=markup)
 
 
-@bot.message_handler(commands=['a'])
-async def table_a(message):
-    await bot.send_message(message.chat.id, get_table('a'))
-
-
-@bot.message_handler(commands=['b'])
-async def table_b(message):
-    bot.send_message(message.chat.id, get_table('b'))
-
-
-@bot.message_handler(commands=['c'])
-async def table_c(message):
-    await bot.send_message(message.chat.id, get_table('c'))
+@bot.message_handler(commands=['a', 'b', 'c'])
+async def tables_command(message):
+    command = message.text[1]
+    await bot.send_message(message.chat.id, get_table(command))
 
 
 @bot.callback_query_handler(func=lambda call: True)
