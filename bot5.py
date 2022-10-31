@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot5
 # Description: Asynchronous NBP bot with aiogram
-# Version: 0.1a1
+# Version: 0.1a2
 # Owner: Ruslan Korniichuk
 
 import os
@@ -63,8 +63,8 @@ async def inline(inline_query: InlineQuery):
             id='3', title='GBP', input_message_content=InputTextMessageContent(
                     get_rate('gbp'), parse_mode='MARKDOWN'))
 
-    # cache_time -- maximum amount of time in seconds that the result of
-    # inline query may be cached on the server.
+    # cache_time -- maximum amount of time in seconds that result of
+    # inline query may be cached on server
     await bot.answer_inline_query(inline_query.id, [r1, r2, r3], cache_time=1)
 
 
