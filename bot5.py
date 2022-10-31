@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot5
 # Description: Asynchronous NBP bot with aiogram
-# Version: 0.1a2
+# Version: 0.1a3
 # Owner: Ruslan Korniichuk
 
 import os
@@ -24,7 +24,7 @@ from nbp import get_rate, get_table
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-bot = Bot(token=TOKEN)
+bot = Bot(token=TOKEN, parse_mode="Markdown")
 dp = Dispatcher(bot)
 
 markup = InlineKeyboardMarkup()
@@ -42,26 +42,25 @@ async def start(message: Message):
 @dp.message_handler(commands=['a', 'b', 'c'])
 async def tables_command(message: Message):
     command = message.text[1]
-    await message.answer(get_table(command), parse_mode='MARKDOWN')
+    await message.answer(get_table(command))
 
 
 @dp.callback_query_handler(lambda callback_query: True)
 async def callback_querry(query: CallbackQuery):
-    await bot.send_message(query.message.chat.id, get_table(query.data),
-                           parse_mode='MARKDOWN')
+    await bot.send_message(query.message.chat.id, get_table(query.data))
 
 
 @dp.inline_handler(lambda query: query.query == 'rate')
 async def inline(inline_query: InlineQuery):
     r1 = InlineQueryResultArticle(
             id='1', title='USD', input_message_content=InputTextMessageContent(
-                    get_rate('usd'), parse_mode='MARKDOWN'))
+                    get_rate('usd')))
     r2 = InlineQueryResultArticle(
             id='2', title='EUR', input_message_content=InputTextMessageContent(
-                    get_rate('eur'), parse_mode='MARKDOWN'))
+                    get_rate('eur')))
     r3 = InlineQueryResultArticle(
             id='3', title='GBP', input_message_content=InputTextMessageContent(
-                    get_rate('gbp'), parse_mode='MARKDOWN'))
+                    get_rate('gbp')))
 
     # cache_time -- maximum amount of time in seconds that result of
     # inline query may be cached on server
