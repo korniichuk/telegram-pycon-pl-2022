@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot4
 # Description: Asynchronous NBP bot with python-telegram-bot
-# Version: 0.1a3
+# Version: 0.1a4
 # Owner: Ruslan Korniichuk
 
 import os
@@ -53,13 +53,13 @@ async def tables_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def inline(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r1 = InlineQueryResultArticle(
             '1', 'USD', InputTextMessageContent(
-                    get_rate('usd'), parse_mode='MARKDOWN'))
+                    get_rate('usd'), parse_mode='Markdown'))
     r2 = InlineQueryResultArticle(
             '2', 'EUR', InputTextMessageContent(
-                    get_rate('eur'), parse_mode='MARKDOWN'))
+                    get_rate('eur'), parse_mode='Markdown'))
     r3 = InlineQueryResultArticle(
             '3', 'GBP', InputTextMessageContent(
-                    get_rate('gbp'), parse_mode='MARKDOWN'))
+                    get_rate('gbp'), parse_mode='Markdown'))
 
     # cache_time -- maximum amount of time in seconds that result of
     # inline query may be cached on server

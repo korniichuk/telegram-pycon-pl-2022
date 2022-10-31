@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot3
 # Description: Asynchronous NBP bot with pyTelegramBotAPI
-# Version: 0.1a5
+# Version: 0.1a6
 # Owner: Ruslan Korniichuk
 
 import asyncio
@@ -21,7 +21,7 @@ from nbp import get_rate, get_table
 load_dotenv()
 TOKEN = os.getenv('TOKEN')
 
-bot = AsyncTeleBot(TOKEN, parse_mode='MARKDOWN')
+bot = AsyncTeleBot(TOKEN, parse_mode='Markdown')
 
 markup = InlineKeyboardMarkup()
 a = InlineKeyboardButton('table A', callback_data='a')
@@ -51,13 +51,13 @@ async def callback_querry(call):
 async def inline(inline_query):
     r1 = InlineQueryResultArticle(
             '1', 'USD', InputTextMessageContent(
-                    get_rate('usd'), parse_mode='MARKDOWN'))
+                    get_rate('usd'), parse_mode='Markdown'))
     r2 = InlineQueryResultArticle(
             '2', 'EUR', InputTextMessageContent(
-                    get_rate('eur'), parse_mode='MARKDOWN'))
+                    get_rate('eur'), parse_mode='Markdown'))
     r3 = InlineQueryResultArticle(
             '3', 'GBP', InputTextMessageContent(
-                    get_rate('gbp'), parse_mode='MARKDOWN'))
+                    get_rate('gbp'), parse_mode='Markdown'))
 
     # cache_time -- maximum amount of time in seconds that result of
     # inline query may be cached on server
