@@ -47,8 +47,7 @@ async def tables(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def inline(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r1 = InlineQueryResultArticle(
             '1', 'USD', InputTextMessageContent(
-                    get_rate('usd'),
-                    parse_mode='MARKDOWN'))
+                    get_rate('usd'), parse_mode='MARKDOWN'))
     r2 = InlineQueryResultArticle(
             '2', 'EUR', InputTextMessageContent(
                     get_rate('eur'), parse_mode='MARKDOWN'))
