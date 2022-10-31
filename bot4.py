@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot4
 # Description: Asynchronous NBP bot with python-telegram-bot
-# Version: 0.1a2
+# Version: 0.1a3
 # Owner: Ruslan Korniichuk
 
 import os
@@ -60,7 +60,11 @@ async def inline(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r3 = InlineQueryResultArticle(
             '3', 'GBP', InputTextMessageContent(
                     get_rate('gbp'), parse_mode='MARKDOWN'))
-    await context.bot.answer_inline_query(update.inline_query.id, [r1, r2, r3])
+
+    # cache_time -- maximum amount of time in seconds that result of
+    # inline query may be cached on server
+    await context.bot.answer_inline_query(
+            update.inline_query.id, [r1, r2, r3], cache_time=1)
 
 
 if __name__ == '__main__':

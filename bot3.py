@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot3
 # Description: Asynchronous NBP bot with pyTelegramBotAPI
-# Version: 0.1a4
+# Version: 0.1a5
 # Owner: Ruslan Korniichuk
 
 import asyncio
@@ -58,7 +58,10 @@ async def inline(inline_query):
     r3 = InlineQueryResultArticle(
             '3', 'GBP', InputTextMessageContent(
                     get_rate('gbp'), parse_mode='MARKDOWN'))
-    await bot.answer_inline_query(inline_query.id, [r1, r2, r3])
+
+    # cache_time -- maximum amount of time in seconds that result of
+    # inline query may be cached on server
+    await bot.answer_inline_query(inline_query.id, [r1, r2, r3], cache_time=1)
 
 
 asyncio.run(bot.infinity_polling())
