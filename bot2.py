@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot2
 # Description: Synchronous NBP bot with pyTelegramBotAPI
-# Version: 0.1a1
+# Version: 0.1a2
 # Owner: Ruslan Korniichuk
 
 import os
@@ -50,7 +50,7 @@ def callback_querry(call):
 
 
 @bot.inline_handler(lambda query: query.query == 'rate')
-def query(inline_query):
+def inline(inline_query):
     r1 = telebot.types.InlineQueryResultArticle(
             '1', 'USD', telebot.types.InputTextMessageContent(
                     get_rate('usd'),
