@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot2
 # Description: Synchronous NBP bot with pyTelegramBotAPI
-# Version: 0.1a3
+# Version: 0.1a4
 # Owner: Ruslan Korniichuk
 
 import os
@@ -34,19 +34,10 @@ def start(message):
     bot.send_message(message.chat.id, "🔥 Hello, World!", reply_markup=markup)
 
 
-@bot.message_handler(commands=['a'])
-def table_a(message):
-    bot.send_message(message.chat.id, get_table('a'))
-
-
-@bot.message_handler(commands=['b'])
-def table_b(message):
-    bot.send_message(message.chat.id, get_table('b'))
-
-
-@bot.message_handler(commands=['c'])
-def table_c(message):
-    bot.send_message(message.chat.id, get_table('c'))
+@bot.message_handler(commands=['a', 'b', 'c'])
+def tables_command(message):
+    command = message.text[1]
+    bot.send_message(message.chat.id, get_table(command))
 
 
 @bot.callback_query_handler(func=lambda call: True)
