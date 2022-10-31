@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot4
 # Description: Asynchronous NBP bot with python-telegram-bot
-# Version: 0.1a1
+# Version: 0.1a2
 # Owner: Ruslan Korniichuk
 
 import os
@@ -38,7 +38,13 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                    reply_markup=markup)
 
 
-async def tables(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def tables_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    command = update.message.text[1]
+    await context.bot.send_message(chat_id=update.effective_chat.id,
+                                   text=get_table(command))
+
+
+async def tables_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await context.bot.send_message(chat_id=update.effective_chat.id,
                                    text=get_table(query.data))
@@ -63,7 +69,10 @@ if __name__ == '__main__':
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
 
-    application.add_handler(CallbackQueryHandler(tables))
+    abc_handler = CommandHandler(['a', 'b', 'c'], tables_command)
+    application.add_handler(abc_handler)
+
+    application.add_handler(CallbackQueryHandler(tables_callback))
 
     # re.match() is used
     application.add_handler(InlineQueryHandler(inline, pattern='rate'))
