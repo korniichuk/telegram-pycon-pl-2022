@@ -246,10 +246,11 @@ If you can see exclamation mark, Telegram bot deployed successfully:
 ![eb_open.png](img/eb_open.png "'$ eb open' command. Result")
 
 ### Domain name
-We need to purchase and configure a custom domain name (e.g., `telegrambot.click` for 3 USD) for our Elastic Beanstalk environment.
 **This part is out of workshop scope!**
+We need to purchase and configure a custom domain name (e.g., `telegrambot.click` for 3 USD) for our Elastic Beanstalk environment.
 
 ### SSL certificate
+**This part is out of workshop scope!**
 We need use HTTPS to allow secure connection.
 
 To set up SSL we need to obtain SSL certificate:
@@ -265,6 +266,7 @@ SSL certificate will be issued after a while (it can take up to 48 hours - usual
 **Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
 
 ### Fix security group
+**This part is out of workshop scope!**
 We need to modify Load Balancer security group to allow secure connections:
 1. Navigate to Amazon EC2.
 2. On `Load Balancers` page select your load balancer.
@@ -277,6 +279,7 @@ We need to modify Load Balancer security group to allow secure connections:
 **Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
 
 ### Add listener
+**This part is out of workshop scope!**
 1. Navigate to Amazon EC2.
 2. On `Load Balancers` page select your load balancer.
 3. Select `Listeners` tab and copy default rule for HTTP listener (`Default: forwarding to …`).
@@ -290,8 +293,24 @@ We need to modify Load Balancer security group to allow secure connections:
 **Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
 
 ### Add DNS record
+**This part is out of workshop scope!**
 
 ![dns_record.png](img/dns_record.png "DNS record")
+
+### Setting Telegram bot WebHook
+All you have to do is to call the [setWebhook method](https://core.telegram.org/bots/api#setwebhook) in the Bot API via the following url:
+
+`https://api.telegram.org/bot{TOKEN}/setWebhook?url={URL}/`
+
+Where:
+- `TOKEN` -- token you got from BotFather when you created your bot,
+- `URL` -- your domain name (must be HTTPS).
+
+Exmaple:
+
+`https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=https://korniichuk.click/`
+
+**Source:** https://xabaras.medium.com/setting-your-telegram-bot-webhook-the-easy-way-c7577b2d6f72
 
 ## Deploy on AWS with SAM
 ```ssh
