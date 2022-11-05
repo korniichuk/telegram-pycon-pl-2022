@@ -48,7 +48,7 @@ Success! Inline setting updated:
 
 ## Host Telegram bot locally
 ### Hello world bot with pyTelegramBotAPI
-Lets start with "Hello, World!" with pyTelegramBotAPI.
+Lets start with `Hello, World!` bot written with pyTelegramBotAPI.
 ```sh
 $ git clone https://github.com/korniichuk/telegram-pycon-pl-2022.git
 $ cd telegram-pycon-pl-2022
