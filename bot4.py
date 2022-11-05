@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Name: bot4
 # Description: Asynchronous NBP bot with python-telegram-bot
-# Version: 0.1a4
+# Version: 0.1a5
 # Owner: Ruslan Korniichuk
 
 import os
@@ -40,14 +40,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def tables_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     command = update.message.text[1]
-    await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text=get_table(command))
+    await context.bot.send_message(
+            chat_id=update.effective_chat.id, text=get_table(command),
+            parse_mode='Markdown')
 
 
 async def tables_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
-    await context.bot.send_message(chat_id=update.effective_chat.id,
-                                   text=get_table(query.data))
+    await context.bot.send_message(
+            chat_id=update.effective_chat.id, text=get_table(query.data),
+            parse_mode='Markdown')
 
 
 async def inline(update: Update, context: ContextTypes.DEFAULT_TYPE):
