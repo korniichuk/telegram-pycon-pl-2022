@@ -265,37 +265,33 @@ SSL certificate will be issued after a while (it can take up to 48 hours - usual
 
 **Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
 
-### Fix security group
-**This part is out of workshop scope!**
-We need to modify Load Balancer security group to allow secure connections:
-1. Navigate to Amazon EC2.
-2. On `Load Balancers` page select your load balancer.
-3. Scroll down `Description` tab until `Security section`.
-4. Copy security group name and open link near it.
-5. On the `Security Groups` page search the page for security group name you copied earlier, click on `Security group ID`.
-6. On opened page click `Edit inbound rules`, then click `Add rule`.
-7. Set `HTTPS` type, and `Anywhere-IPv4` source, save rule and close the page.
-
-**Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
-
 ### Add listener
 **This part is out of workshop scope!**
-1. Navigate to Amazon EC2.
-2. On `Load Balancers` page select your load balancer.
-3. Select `Listeners` tab and copy default rule for HTTP listener (`Default: forwarding to …`).
-4. Click `Add listener` button.
-5. Select `HTTPS` protocol from the dropdown.
-6. In Default actions click `Add action`->`Forward`
-7. From the `Target group` dropdown select the same group you copied earlier from HTTP listener default action.
-8. From `Security policy` dropdown select suitable policy (`ELBSecurityPolicy-2016-08` policy is recommended). More about policies: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
-9. Select `Default SSL/TLS certificate` you created earlier and click `Add`.
+1. Open the [Elastic Beanstalk console](https://console.aws.amazon.com/elasticbeanstalk), and in the Regions list, select your AWS Region (e.g., `eu-west-1`).
+2. In the navigation pane, choose `Environments`, and then choose the name of your environment from the list (e.g., `telegram-dev`).
+3. In the navigation pane, choose `Configuration`.
+4. In the `Load balancer` configuration category, choose `Edit`. Note: If the Load balancer configuration category doesn't have an `Edit` button, your environment doesn't have a load balancer.
+5. On the `Modify Application Load Balancer` page, choose `Add listener`.
+6. For `Port`, type the incoming traffic `443` port.
+7. For `Protocol`, choose `HTTPS`.
+8. For `SSL certificate`, choose your certificate. Choose `Add`. Scroll down and click `Apply`
 
-**Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
+**Important:** Adding listener this way (via [Elastic Beanstalk](https://console.aws.amazon.com/elasticbeanstalk)) will fix security group automatically. For adding listener via EC2 you need to fix security group manually.
+
+**Source:** https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/configuring-https-elb.html
 
 ### Add DNS record
 **This part is out of workshop scope!**
 
 ![dns_record.png](img/dns_record.png "DNS record")
+
+### EB terminate
+To delete bot from AWS cloud, terminate the environment:
+```ssh
+$ eb terminate
+```
+
+## Deploy on AWS with SAM
 
 ### Setting Telegram bot WebHook
 All you have to do is to call the [setWebhook method](https://core.telegram.org/bots/api#setwebhook) in the Bot API via the following url:
@@ -311,17 +307,6 @@ Exmaple:
 `https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=https://korniichuk.click/`
 
 **Source:** https://xabaras.medium.com/setting-your-telegram-bot-webhook-the-easy-way-c7577b2d6f72
-
-## Deploy on AWS with SAM
-```ssh
-$ cd aws-elastic-beanstalk
-$ eb init
-```
-
-To delete bot from AWS cloud, terminate the environment:
-```ssh
-$ eb terminate
-```
 
 ## Extra sources
 1. [Error code: 429. Description: Too Many Requests](https://github.com/eternnoir/pyTelegramBotAPI/issues/253)
