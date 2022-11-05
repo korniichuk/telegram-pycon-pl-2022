@@ -91,7 +91,14 @@ You can achieve the same result with `/start` command.
 $ python3 bot2.py
 ```
 Navigate to your Telegram bot (e.g., `@PyConPLBot`) and send `/start` command.
-Send `/a`, `/b`, and `/c` commands.
+
+Test `table A`, `table B`, and `table C` buttons:
+
+![table_c_command.png](img/table_c_command.png "'table C' command")
+
+Send `/a`, `/b`, and `/c` commands:
+
+![c_command.png](img/c_command.png "'/c' command")
 
 Create a new Telegram group (e.g., `PyCon PL group`).
 Add your Telegram bot (e.g., `@PyConPLBot`) to the group.
