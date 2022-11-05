@@ -80,6 +80,11 @@ Start `Hello, World!` bot:
 $ python3 bot1.py
 ```
 
+Navigate to your Telegram bot (e.g., `@PyConPLBot`) and click `START` button:
+![hello_world_bot.png](img/hello_world_bot.png "'Hello, World!' bot")
+
+You can achieve the same result with `/start` command.
+
 ### Synchronous NBP bot with pyTelegramBotAPI
 ```sh
 $ python3 bot2.py
