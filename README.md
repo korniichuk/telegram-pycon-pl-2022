@@ -75,7 +75,7 @@ Example:
 $ echo TOKEN=5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA > .env
 ```
 
-Start "Hello, World!" bot:
+Start `Hello, World!` bot:
 ```sh
 $ python3 bot1.py
 ```
