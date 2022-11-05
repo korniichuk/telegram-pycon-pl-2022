@@ -72,7 +72,7 @@ $ echo TOKEN=<TOKEN> > .env
 
 Example:
 ```sh
-$ echo TOKEN=5484809728:AAGah-Q6vLdwzYZ3aNLvF5Bv4PmACIu0TnI > .env
+$ echo TOKEN=5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA > .env
 ```
 
 Start "Hello, World!" bot:
