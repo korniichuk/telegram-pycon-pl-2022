@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 # Name: application
 # Description: "Hello, World!" and echo bot with pyTelegramBotAPI
-# Version: 0.1a1
+# Version: 0.1a2
 # Owner: Ruslan Korniichuk
 
 import os
+import time
 
 from flask import Flask, request
 import telebot
@@ -35,7 +36,7 @@ def get_message():
 
 @application.route('/')
 def webhook():
-    bot.remove_webhook()
+    time.sleep(1)
     url = "https://korniichuk.click/" + TOKEN
     bot.set_webhook(url)
     return '!', 200
