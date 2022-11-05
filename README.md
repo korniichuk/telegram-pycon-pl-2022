@@ -101,6 +101,16 @@ Test `/start@<you_bot_username>` (e.g., `/start@pyconplbot`) command:
 
 ![telegram_group.png](img/telegram_group.png "Telegram group")
 
+Communication with Telegram bots is not always easy.
+You had to send them messages in separate chats or add them to your groups.
+
+With the `inline mode`, bots become omnipresent and can be used as a tool in any of your chats, groups or channels – it doesn't matter, whether the bot is a member or not.
+
+Open chat with your friend(s) or create a new Telegram group, and type the username of your bot (e.g., `@pyconplbot`).
+You can see inline placeholder now:
+
+![inline_placeholder.png](img/inline_placeholder.png "Inline mode. Placeholder")
+
 ### Asynchronous NBP bot with pyTelegramBotAPI
 ```sh
 $ python3 bot3.py
