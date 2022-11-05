@@ -383,6 +383,7 @@ To delete Telegram bot WebHook:
 `https://api.telegram.org/bot{TOKEN}/setWebhook?url=`
 
 Example:
+
 `https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=`
 
 `{"ok":true,"result":true,"description":"Webhook was deleted"}`
