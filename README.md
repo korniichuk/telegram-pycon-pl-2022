@@ -377,6 +377,8 @@ Exmaple:
 
 `{"ok":true,"result":true,"description":"Webhook was set"}`
 
+**Source:** https://xabaras.medium.com/setting-your-telegram-bot-webhook-the-easy-way-c7577b2d6f72
+
 ### Delete Telegram bot WebHook
 To delete Telegram bot WebHook:
 
@@ -387,8 +389,6 @@ Example:
 `https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=`
 
 `{"ok":true,"result":true,"description":"Webhook was deleted"}`
-
-**Source:** https://xabaras.medium.com/setting-your-telegram-bot-webhook-the-easy-way-c7577b2d6f72
 
 ### SAM delete
 To delete the sample application that you created, use the AWS CLI:
