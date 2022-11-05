@@ -306,11 +306,11 @@ $ sam --version
 ### Token
 Insert your token to [lambda_function.py](https://github.com/korniichuk/telegram-pycon-pl-2022/blob/main/aws-serverless-application-model/code/lambda_function.py) file. For example, from:
 
-    `TOKEN = "<TOKEN>"  # token from @BotFather for your Telegram bot`
+`TOKEN = "<TOKEN>"  # token from @BotFather for your Telegram bot`
 
 to:
 
-    `TOKEN = "5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA"`
+`TOKEN = "5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA"`
 
 ### SAM build
 ```sh
