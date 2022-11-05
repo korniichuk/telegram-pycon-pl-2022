@@ -396,5 +396,6 @@ $ eb terminate
 ```
 
 ## Extra sources
-1. [Sample Python Telegram bot AWS serverless](https://github.com/jojo786/Sample-Python-Telegram-Bot-AWS-Serverless)
-2. [Error code: 429. Description: Too Many Requests](https://github.com/eternnoir/pyTelegramBotAPI/issues/253)
+1. [Long polling vs Webhooks](https://grammy.dev/guide/deployment-types.html)
+2. [Sample Python Telegram bot AWS serverless](https://github.com/jojo786/Sample-Python-Telegram-Bot-AWS-Serverless)
+3. [Error code: 429. Description: Too Many Requests](https://github.com/eternnoir/pyTelegramBotAPI/issues/253)
