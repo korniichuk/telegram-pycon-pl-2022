@@ -292,6 +292,75 @@ $ eb terminate
 ```
 
 ## Deploy on AWS with SAM
+### Install SAM
+```sh
+$ wget https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip
+$ unzip aws-sam-cli-linux-x86_64.zip -d sam-installation
+$ sudo ./sam-installation/install
+
+$ sam --version
+```
+
+**Source:** https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
+
+### Token
+Insert your token to [lambda_function.py](https://github.com/korniichuk/telegram-pycon-pl-2022/blob/main/aws-serverless-application-model/code/lambda_function.py) file. For example, from:
+
+    `TOKEN = "<TOKEN>"  # token from @BotFather for your Telegram bot`
+
+to:
+
+    `TOKEN = "5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA"`
+
+### SAM build
+```sh
+$ cd ..
+$ cd aws-serverless-application-model
+
+$ sam build
+```
+
+### SAM deploy
+```sh
+$ sam deploy --guided
+```
+
+Enter `Stack Name` (e.g., `telegram`). Enter `AWS Region` (e.g., `eu-west-1`).
+
+```
+Confirm changes before deploy [y/N]
+```
+
+Enter `Y`.
+
+```
+Allow SAM CLI IAM role creation [Y/n]:
+```
+Enter `Y`.
+
+```
+Disable rollback [y/N]:
+```
+
+Enter `N`.
+
+```
+MyLambdaFunction Function Url may not have authorization defined, Is this okay? [y/N]:
+```
+
+Enter `Y`.
+
+```
+Save arguments to configuration file [Y/n]: 
+```
+
+Enter `Y`.
+
+Enter SAM configuration file name (e.g., `samconfig.toml`).
+
+Enter SAM configuration environment (e.g., `default`). 
+
+Copy and save the Lambda URL `Value` from terminal (e.g., `https://avi4v7gy25zo4lizhqqzh3dtom0zufol.lambda-url.eu-west-1.on.aws/`).
 
 ### Setting Telegram bot WebHook
 All you have to do is to call the [setWebhook method](https://core.telegram.org/bots/api#setwebhook) in the Bot API via the following url:
@@ -300,13 +369,31 @@ All you have to do is to call the [setWebhook method](https://core.telegram.org/
 
 Where:
 - `TOKEN` -- token you got from BotFather when you created your bot,
-- `URL` -- your domain name (must be HTTPS).
+- `URL` -- Lambda URL for the MyLambdaFunction (must be HTTPS).
 
 Exmaple:
 
-`https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=https://korniichuk.click/`
+`https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=https://avi4v7gy25zo4lizhqqzh3dtom0zufol.lambda-url.eu-west-1.on.aws/`
+
+`{"ok":true,"result":true,"description":"Webhook was set"}`
+
+### Delete Telegram bot WebHook
+To delete Telegram bot WebHook:
+
+`https://api.telegram.org/bot{TOKEN}/setWebhook?url=`
+
+Example:
+`https://api.telegram.org/bot5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA/setWebhook?url=`
+
+`{"ok":true,"result":true,"description":"Webhook was deleted"}`
 
 **Source:** https://xabaras.medium.com/setting-your-telegram-bot-webhook-the-easy-way-c7577b2d6f72
+
+### SAM delete
+To delete the sample application that you created, use the AWS CLI:
+```sh
+$ sam delete
+```
 
 ## Extra sources
 1. [Error code: 429. Description: Too Many Requests](https://github.com/eternnoir/pyTelegramBotAPI/issues/253)
