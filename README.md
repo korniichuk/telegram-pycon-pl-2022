@@ -230,7 +230,7 @@ $ eb setenv TOKEN=5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA
 **Source:** https://aws.amazon.com/premiumsupport/knowledge-center/elastic-beanstalk-pass-variables/
 
 ### EB deploy
-DTo dploy new source code to the environment:
+To deploy new source code to the environment:
 ```sh
 $ eb deploy
 ```
