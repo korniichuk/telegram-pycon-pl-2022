@@ -324,4 +324,4 @@ $ eb terminate
 ```
 
 ## Extra sources
-1. https://github.com/eternnoir/pyTelegramBotAPI/issues/253
+1. [Error code: 429. Description: Too Many Requests](https://github.com/eternnoir/pyTelegramBotAPI/issues/253)
