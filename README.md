@@ -144,7 +144,13 @@ $ python3 bot4.py
 $ python3 bot5.py
 ```
 
+**Note:** Parse mode `Markdown` is legacy since Telegram Bot API 4.5, retained for backward compatibility. Source: https://core.telegram.org/bots/api#formatting-options
+
+
 ## Deploy on AWS with Elastic Beanstalk
+The following example is written on pyTelegramBotAPI. See aiogram example: https://stackoverflow.com/a/64911415
+
+### AWS CLI
 Install AWS CLI:
 ```sh
 $ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -156,6 +162,7 @@ $ aws --version
 
 **Source:** https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions
 
+### EB CLI
 Install EB CLI:
 ```sh
 $ pip install awsebcli
@@ -164,6 +171,127 @@ $ eb --version
 ```
 
 **Source:** https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html
+
+### EB init
+Navigate to `aws-elastic-beanstalk` folder and initialize the directory with the EB CLI:
+
+```sh
+$ cd aws-elastic-beanstalk
+
+$ eb init
+```
+
+Select a default region (e.g., `eu-west-1`). Enter a new application name for your Elastic Beanstalk application (e.g., `telegram`).
+
+```
+It appears you are using Python. Is this correct?
+(Y/n):
+```
+
+Enter `Y`.
+
+Select a platform branch (e.g., `Python 3.8 running on 64bit Amazon Linux 2`). Details: https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.python
+
+```
+Do you want to set up SSH for your instances?
+(Y/n):
+```
+
+Enter `Y`.
+
+### EB create
+Create a new Elastic Beanstalk environment:
+```sh
+$ eb create
+```
+
+Enter environment name (e.g., `telegram-dev`).
+Enter DNS CNAME prefix (e.g., `telegram-dev`).
+Select a load balancer type (e.g., `application`).
+
+```
+Would you like to enable Spot Fleet requests for this environment? (y/N):
+```
+
+Enter `N`.
+
+### EB setenv
+To set Telegram token as an environment variable in the EB CLI, run the following command:
+
+```sh
+$ eb setenv TOKEN=<TOKEN>
+```
+
+Example:
+```sh
+$ eb setenv TOKEN=5741693832:AAFyfYpqWRHaGVhTt9CO4edV7bTlNR7bvaA
+```
+
+**Source:** https://aws.amazon.com/premiumsupport/knowledge-center/elastic-beanstalk-pass-variables/
+
+### EB deploy
+DTo dploy new source code to the environment:
+```sh
+$ eb deploy
+```
+
+### EB open
+Open the EB application URL in a browser:
+```sh
+$ eb open
+```
+
+If you can see exclamation mark, Telegram bot deployed successfully:
+ 
+![eb_open.png](img/eb_open.png "'$ eb open' command. Result")
+
+### Domain name
+We need to purchase and configure a custom domain name (e.g., `telegrambot.click` for 3 USD) for our Elastic Beanstalk environment.
+**This part is out of workshop scope!**
+
+### SSL certificate
+We need use HTTPS to allow secure connection.
+
+To set up SSL we need to obtain SSL certificate:
+1. Navigate to AWS Certificate Manager (ACM).
+2. Click `Request certificate` link or `Request` button. Select `Request a public certificate`. Click `Next`.
+3. Add two domain names: one for website (e.g., `korniichuk.click`) and one wildcard domain (e.g., `*.korniichuk.click`). It will cover all subdomains including www or any other.
+4. Select `DNS validation` and click `Request` button.
+
+Because we delegated domain management to AWS, we need to validate ownership by expanding any domain and clicking `Create records in Route 53`.
+
+SSL certificate will be issued after a while (it can take up to 48 hours - usually within 30 minutes after nameservers delegation is completed).
+
+**Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
+
+### Fix security group
+We need to modify Load Balancer security group to allow secure connections:
+1. Navigate to Amazon EC2.
+2. On `Load Balancers` page select your load balancer.
+3. Scroll down `Description` tab until `Security section`.
+4. Copy security group name and open link near it.
+5. On the `Security Groups` page search the page for security group name you copied earlier, click on `Security group ID`.
+6. On opened page click `Edit inbound rules`, then click `Add rule`.
+7. Set `HTTPS` type, and `Anywhere-IPv4` source, save rule and close the page.
+
+**Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
+
+### Add listener
+1. Navigate to Amazon EC2.
+2. On `Load Balancers` page select your load balancer.
+3. Select `Listeners` tab and copy default rule for HTTP listener (`Default: forwarding to …`).
+4. Click `Add listener` button.
+5. Select `HTTPS` protocol from the dropdown.
+6. In Default actions click `Add action`->`Forward`
+7. From the `Target group` dropdown select the same group you copied earlier from HTTP listener default action.
+8. From `Security policy` dropdown select suitable policy (`ELBSecurityPolicy-2016-08` policy is recommended). More about policies: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
+9. Select `Default SSL/TLS certificate` you created earlier and click `Add`.
+
+**Source:** https://dev.to/bnn1/deploying-dockerized-nextjs-app-to-aws-eb-part-3-setting-custom-domain-45bm
+
+### Add DNS record
+
+![dns_record.png](img/dns_record.png "DNS record")
 
 ## Deploy on AWS with SAM
 ```ssh
