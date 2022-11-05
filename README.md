@@ -40,7 +40,7 @@ Click `Turn on` button:
 Click `Edit inline placeholder` button:
 ![botfather_edit_bot_0006.png](img/botfather_edit_bot_0006.png "BotFather. Edit inline placeholder")
 
-Send placeholder:
+Send placeholder (e.g., `buy and sell prices of foreign currencies`):
 ![botfather_edit_bot_0007.png](img/botfather_edit_bot_0007.png "BotFather. Send placeholder")
 
 Success! Inline setting updated:
