@@ -81,6 +81,7 @@ $ python3 bot1.py
 ```
 
 Navigate to your Telegram bot (e.g., `@PyConPLBot`) and click `START` button:
+
 ![hello_world_bot.png](img/hello_world_bot.png "'Hello, World!' bot")
 
 You can achieve the same result with `/start` command.
@@ -89,6 +90,16 @@ You can achieve the same result with `/start` command.
 ```sh
 $ python3 bot2.py
 ```
+Navigate to your Telegram bot (e.g., `@PyConPLBot`) and send `/start` command.
+Send `/a`, `/b`, and `/c` commands.
+
+Create a new Telegram group (e.g., `PyCon PL group`).
+Add your Telegram bot (e.g., `@PyConPLBot`) to the group.
+Add your friend(s) (optional).
+
+Test `/start@<you_bot_username>` (e.g., `/start@pyconplbot`) command:
+
+![telegram_group.png](img/telegram_group.png "Telegram group")
 
 ### Asynchronous NBP bot with pyTelegramBotAPI
 ```sh
