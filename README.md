@@ -107,9 +107,20 @@ You had to send them messages in separate chats or add them to your groups.
 With the `inline mode`, bots become omnipresent and can be used as a tool in any of your chats, groups or channels – it doesn't matter, whether the bot is a member or not.
 
 Open chat with your friend(s) or create a new Telegram group, and type the username of your bot (e.g., `@pyconplbot`).
-You can see inline placeholder now:
+You can see inline placeholder now (e.g., `buy and sell prices of foreign currencies`):
 
 ![inline_placeholder.png](img/inline_placeholder.png "Inline mode. Placeholder")
+
+Type space and `rate` command (e.g., `@pyconplbot rate`):
+
+![inline_mode.png](img/inline_mode.png "Inline mode. 'rate' command")
+
+Select `USD`:
+![inline_mode_usd.png](img/inline_mode_usd.png "Inline mode. 'rate' command. USD")
+
+See result:
+![inline_mode_usd_result.png](img/inline_mode_usd_result.png "Inline mode. 'rate' command. USD. Result")
+
 
 ### Asynchronous NBP bot with pyTelegramBotAPI
 ```sh
