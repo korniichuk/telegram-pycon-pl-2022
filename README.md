@@ -322,3 +322,6 @@ To delete bot from AWS cloud, terminate the environment:
 ```ssh
 $ eb terminate
 ```
+
+## Extra sources
+1. https://github.com/eternnoir/pyTelegramBotAPI/issues/253
